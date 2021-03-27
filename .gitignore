@@ -1,0 +1,5 @@
+.env
+node_modules/
+open.sh
+start.sh
+package-lock.json
