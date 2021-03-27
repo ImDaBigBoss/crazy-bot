@@ -22,6 +22,8 @@ client.on("message", async message => {
 			" - " + bot_prefix + "wrong\n" +
 			" - " + bot_prefix + "no\n" +
 			" - " + bot_prefix + "goodjob\n" +
+			" - " + bot_prefix + "github\n" +
+			" - " + bot_prefix + "invite\n" +
 			" - " + "hello";
 
 		message.channel.send(help);
@@ -111,6 +113,10 @@ client.on("message", async message => {
 		message.channel.send({ files: ["https://cdn.discordapp.com/attachments/731837751481204760/799345896617410570/2cb013b6319538eb225728b54bb0940b.jpg"] });
 	} else if (command == bot_prefix + "goodjob") {
 		message.channel.send({ files: ["https://media1.giphy.com/media/hvLLg4whmqcA1XpwRj/source.gif"] });
+	} else if (command == bot_prefix + "github") {
+		message.channel.send("My 1s and 0s are availabe here: https://github.com/ImDaBigBoss/crazy-bot");
+	} else if (command == bot_prefix + "invite") {
+		message.channel.send(`Invite me to your server! https://discord.com/oauth2/authorize?client_id=${bot_id}&scope=bot`);
 	}
 });
 
