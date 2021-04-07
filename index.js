@@ -11,6 +11,18 @@ const bot_token = process.env.bot_token;
 const bot_id = process.env.bot_id;
 const bot_prefix = process.env.bot_prefix;
 
+function EmbedReply(channel, title, url, text) {
+	const embed = new Discord.MessageEmbed()
+	.setColor('#ffd700')
+	.setTitle(title)
+	.setURL(url)
+	.setDescription(text)
+	.setTimestamp()
+	.setFooter('CrazyBot');
+
+	channel.send(embed);
+}
+
 client.on("message", async message => {
 	var command = message.content.split(" ")[0];
 	if (command == bot_prefix + "help") {
@@ -24,9 +36,10 @@ client.on("message", async message => {
 			" - " + bot_prefix + "goodjob\n" +
 			" - " + bot_prefix + "github\n" +
 			" - " + bot_prefix + "invite\n" +
+			" - " + bot_prefix + "choose {thing} or {thing}\n" +
 			" - " + "hello";
 
-		message.channel.send(help);
+			EmbedReply(message.channel, "CrazyBot help", null, help);
 	} else if (message.content.startsWith("Hello") || message.content.startsWith("hello")) {
 		var responses = [
 			"https://media.giphy.com/media/ASd0Ukj0y3qMM/giphy.gif",
@@ -63,10 +76,10 @@ client.on("message", async message => {
 			"Could be",
 			"Hell NO!"
 		];
-		message.reply(ans[Math.floor(Math.random() * ans.length)]);
+		EmbedReply(message.channel, "Magic8 ball", null, ans[Math.floor(Math.random() * ans.length)]);
 	} else if (command == bot_prefix + "praise") {
 		if (message.content == bot_prefix + "praise the sun") {
-			message.channel.send("praise the sun from Dark souls");
+			EmbedReply(message.channel, "Praise", null, "praise the sun from Dark souls");
 			return;
 		}
 
@@ -104,7 +117,7 @@ client.on("message", async message => {
 			"Thank you for being you.",
 			"You're really something special."
 		];
-		message.channel.send(ans[Math.floor(Math.random() * ans.length)]);
+		EmbedReply(message.channel, "Praise", null, ans[Math.floor(Math.random() * ans.length)]);
 	} else if (command == bot_prefix + "wrong") {
 		message.channel.send({ files: ["https://cdn.discordapp.com/attachments/732895652425629756/764680229380685855/video0.mp4"] });
 	} else if (command == bot_prefix + "no") {
@@ -114,9 +127,13 @@ client.on("message", async message => {
 	} else if (command == bot_prefix + "goodjob") {
 		message.channel.send({ files: ["https://media1.giphy.com/media/hvLLg4whmqcA1XpwRj/source.gif"] });
 	} else if (command == bot_prefix + "github") {
-		message.channel.send("My 1s and 0s are availabe here: https://github.com/ImDaBigBoss/crazy-bot");
+		EmbedReply(message.channel, "GitHub page", null, "My 1s and 0s are availabe here: https://github.com/ImDaBigBoss/crazy-bot");
 	} else if (command == bot_prefix + "invite") {
-		message.channel.send(`Invite me to your server! https://discord.com/oauth2/authorize?client_id=${bot_id}&scope=bot`);
+		EmbedReply(message.channel, "Discord invite", null, `Invite me to your server! https://discord.com/oauth2/authorize?client_id=${bot_id}&scope=bot`);
+	} else if (command == bot_prefix + "choose") {
+		var choose = message.content.replace(message.content.split(" ")[0] + " ", "");
+		var ans = choose.split(" or ");
+		EmbedReply(message.channel, "Choice", null, ans[Math.floor(Math.random() * 2)]);
 	}
 });
 
