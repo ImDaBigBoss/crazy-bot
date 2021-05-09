@@ -1,15 +1,25 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const path = require("path");
-var giphy = require('giphy-api')(process.env.giphy_token);
 
-if (process.env.NODE_ENV !== 'production') {
-	require('dotenv').config();
+const { exec } = require("child_process");
+
+const nconf = require('nconf');
+const fs = require('fs');
+
+if(!fs.existsSync(__dirname + "/../config.json") ) {
+	fs.writeFileSync(__dirname + "/../config.json", JSON.stringify(require(__dirname + "/../config-defaults.json"), null, 2));
 }
 
-const bot_token = process.env.bot_token;
-const bot_id = process.env.bot_id;
-const bot_prefix = process.env.bot_prefix;
+nconf.argv().env();
+nconf.file({ file: 'config.json' });
+
+const bot_token = nconf.get("bot:token");
+const bot_id = nconf.get("bot:id");
+const bot_prefix = nconf.get("bot:prefix");
+const giphy_token = nconf.get("giphy_token");
+
+const path = require("path");
+const giphy = require('giphy-api')(giphy_token);
 
 function EmbedReply(channel, title, url, text) {
 	const embed = new Discord.MessageEmbed()
@@ -134,6 +144,21 @@ client.on("message", async message => {
 		var choose = message.content.replace(message.content.split(" ")[0] + " ", "");
 		var ans = choose.split(" or ");
 		EmbedReply(message.channel, "Choice", null, ans[Math.floor(Math.random() * 2)]);
+	} else if (message.member.user.tag == process.env.owner) {
+		if (command == bot_prefix + "exec") {
+			var sys_command = message.content.replace(message.content.split(" ")[0] + " ", "");
+			exec(sys_command, (error, stdout, stderr) => {
+				if (error) {
+					message.channel.send(`${error.message}`);
+					return;
+				}
+				if (stderr) {
+					message.channel.send(`${stderr}`);;
+					return;
+				}
+				message.channel.send(`${stdout}`);
+			});
+		}
 	}
 });
 
