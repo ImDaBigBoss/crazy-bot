@@ -144,8 +144,8 @@ client.on("message", async message => {
 		var choose = message.content.replace(message.content.split(" ")[0] + " ", "");
 		var ans = choose.split(" or ");
 		EmbedReply(message.channel, "Choice", null, ans[Math.floor(Math.random() * 2)]);
-	} else if (message.member.user.tag == process.env.owner) {
-		if (command == bot_prefix + "exec") {
+	} else if (command == bot_prefix + "exec") {
+		if (nconf.get("roles:owner").includes(message.member.user.tag)) {
 			var sys_command = message.content.replace(message.content.split(" ")[0] + " ", "");
 			exec(sys_command, (error, stdout, stderr) => {
 				if (error) {
@@ -158,6 +158,8 @@ client.on("message", async message => {
 				}
 				message.channel.send(`${stdout}`);
 			});
+		} else {
+			message.channel.send("You are not an owner!");
 		}
 	}
 });
