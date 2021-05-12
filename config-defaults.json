@@ -1,11 +1,12 @@
 {
 	"bot": {
-		"token": "",
-		"prefix": "",
-		"id": ""
+	  "token": "",
+	  "tokenn": "",
+	  "prefix": "?",
+	  "id": ""
 	},
 	"roles": {
-		"owner": [""]
+	  "owner": []
 	},
 	"giphy_token": ""
-}
+  }
