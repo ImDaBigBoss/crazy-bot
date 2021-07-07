@@ -59,7 +59,7 @@ module.exports = {
 					EmbedReply(message.channel, "CrazyBot roles", null, "The correct usage is set {user} owner/none");
 				}
 			} else {
-				EmbedReply(message.channel, "CrazyBot roles", null, "This command requires arguments... (set {user} owner/none, {user})");
+				EmbedReply(message.channel, "CrazyBot roles", null, "This command requires arguments:\n - set {user} owner/none\n - {user})");
 			}
 		} else {
 			EmbedReply(message.channel, "CrazyBot roles", null, "You are not an owner.");

@@ -32,11 +32,7 @@ module.exports = {
 					sendMessage(message, `${error.message}`);
 					return;
 				}
-				if (stderr) {
-					sendMessage(message, `${stderr}`);;
-					return;
-				}
-				sendMessage(message, `${stdout}`);
+				sendMessage(message, `${stderr}\n${stdout}`);
 			});
 		} else {
 			message.channel.send("You are not an owner!");

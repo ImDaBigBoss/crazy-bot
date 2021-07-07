@@ -43,7 +43,10 @@ client.on("message", async message => {
 			"https://media.giphy.com/media/Cmr1OMJ2FN0B2/giphy.gif",
 			"https://media.giphy.com/media/fTI9mBoWLef8k/giphy.gif",
 			"https://media.giphy.com/media/3oz8xSjBmD1ZyELqW4/giphy.gif",
-			"https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif"
+			"https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif",
+			"https://media.giphy.com/media/yrhhmre5fN2PtRujfo/giphy.gif",
+			"https://media.giphy.com/media/3oz8xCg7tmgcAdgOGY/giphy.gif",
+			"https://media.giphy.com/media/EVjAANNjkMBKE/giphy.gif"
 		];
 
 		var response = responses[Math.floor(Math.random() * responses.length)];
