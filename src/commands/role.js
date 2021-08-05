@@ -1,7 +1,7 @@
 const { EmbedReply } = require("../messages.js");
 
-function isUser(client, uid) {
-	return !(client.users.cache.find(user => user.id === uid) == null);
+function isUser(message, uid) {
+	return !(message.guild.members.cache.get(uid) == null);
 }
 
 function idFromArg(message, arg) {
@@ -22,7 +22,7 @@ module.exports = {
 			if (args.length == 1) {
 				const uid = idFromArg(message, args[0]);
 
-				if (!isUser(message.client, uid)) {
+				if (!isUser(message, uid)) {
 					EmbedReply(message.channel, "CrazyBot roles", null, "That is not an existing user!");
 					return;
 				}
@@ -37,13 +37,13 @@ module.exports = {
 				if (args[0] == "set") {
 					const uid = idFromArg(message, args[1], constants);
 
-					if (!isUser(message.client, uid)) {
+					if (!isUser(message, uid)) {
 						EmbedReply(message.channel, "CrazyBot roles", null, "That is not an existing user!");
 						return;
 					}
 
 					const role = args[2].toLowerCase();
-					if (role == "none" || role == "owner") {
+					if (role == "none" || role == "owner" || role == "mod" || role == "tts") {
 						constants.nconf.set("roles:" + uid, role);
 						constants.nconf.save(function (err) {
 							require('fs').readFile(__dirname + '/../../config.json', function (err, data) {
@@ -53,13 +53,13 @@ module.exports = {
 
 						EmbedReply(message.channel, "CrazyBot roles", null, "Role set to " + role + "!");
 					} else {
-						EmbedReply(message.channel, "CrazyBot roles", null, "The existing roles are: none, owner");
+						EmbedReply(message.channel, "CrazyBot roles", null, "The existing roles are: none, owner, mod, tts");
 					}
 				} else {
-					EmbedReply(message.channel, "CrazyBot roles", null, "The correct usage is set {user} owner/none");
+					EmbedReply(message.channel, "CrazyBot roles", null, "The correct usage is set {user} none/owner/mod/tts");
 				}
 			} else {
-				EmbedReply(message.channel, "CrazyBot roles", null, "This command requires arguments:\n - set {user} owner/none\n - {user})");
+				EmbedReply(message.channel, "CrazyBot roles", null, "This command requires arguments:\n - set {user} none/owner/mod/tts\n - {user})");
 			}
 		} else {
 			EmbedReply(message.channel, "CrazyBot roles", null, "You are not an owner.");
