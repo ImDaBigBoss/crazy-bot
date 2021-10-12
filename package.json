@@ -9,6 +9,8 @@
     "discord.js": "^12.5.3",
     "dotenv": "^8.6.0",
     "giphy-api": "^2.0.2",
-    "nconf": "^0.11.3"
+    "nconf": "^0.11.3",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
   }
 }
