@@ -40,7 +40,9 @@ Structures.extend('VoiceChannel', VoiceChannel => {
         "poker_night": "755827207812677713",
         "doodle_crew": "878067389634314250",
         "letter_tile": "879863686565621790",
-        "word_snacks": "879863976006127627"
+        "word_snacks": "879863976006127627",
+        "spell_cast": "852509694341283871",
+        "checkers_in_the_park": "832013003968348200"
       }
     }
 

@@ -19,7 +19,7 @@ module.exports = {
 	description: 'Run an activity',
 	execute(message, args, constants) {
 		if (args.length == 0) {
-			EmbedReply(message.channel, "Activity", null, "To run this command, you need to put in a game name: youtube_together, fishington, chess_in_the_park, chess_in_the_park_dev, betrayal, poker_night, doodle_crew, letter_tile, word_snacks");
+			EmbedReply(message.channel, "Activity", null, "To run this command, you need to put in a game name: youtube_together, fishington, chess_in_the_park, chess_in_the_park_dev, betrayal, poker_night, doodle_crew, letter_tile, word_snacks, spell_cast");
 			return;
 		}
 
@@ -31,10 +31,10 @@ module.exports = {
 
 		let invite = vc.channel.activityInvite(args[0]);
 		invite.then(function (result) {
-			if (result.code != null) {
+			if (result.code != 50035) {
 				EmbedReply(message.channel, "Activity", "https://discord.com/invite/" + result.code, "Click the link above to start the activity. This link is valid for the next 1 minute.");
 			} else {
-				EmbedReply(message.channel, "Activity", null, "Failed to generate the invite.");
+				EmbedReply(message.channel, "Activity", null, "That game does not exsit or something else is wrong.");
 			}
 		});
 	},
